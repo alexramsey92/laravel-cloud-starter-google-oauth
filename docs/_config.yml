@@ -1,1 +1,8 @@
-remote_theme: jekyll/cayman
+# GitHub Pages configuration
+title: Laravel Cloud Starter - Google OAuth
+description: Production-ready Laravel 12 starter with Google OAuth, Livewire Volt, and Tailwind CSS
+theme: jekyll-theme-minimal
+show_downloads: true
+github:
+  repository_url: https://github.com/alexramsey92/laravel-cloud-starter-google-oauth
+  is_project_page: true
