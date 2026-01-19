@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Cloud Starter - Google OAuth</title>
+    <meta name="description" content="A professional Laravel 12 starter template with Google OAuth authentication, Livewire Volt, and Tailwind CSS">
+    <meta name="keywords" content="Laravel, Google OAuth, Authentication, Livewire, Tailwind CSS">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .features {
+            background: white;
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-start {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .quick-start h2 {
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .navbar-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="navbar-brand">🚀 Laravel Cloud Starter</a>
+            <ul class="navbar-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#quick-start">Quick Start</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                <li><a href="https://github.com/alexramsey92/laravel-cloud-starter-google-oauth" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Laravel Cloud Starter</h1>
+            <p>Production-ready Laravel 12 starter with Google OAuth, Livewire Volt, and Tailwind CSS</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/alexramsey92/laravel-cloud-starter-google-oauth" class="btn btn-primary">View on GitHub</a>
+                <a href="#quick-start" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="features" id="features">
+            <h2>✨ Key Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🔐</div>
+                    <h3>Google OAuth Integration</h3>
+                    <p>Complete Google OAuth 2.0 implementation with Laravel Socialite. Sign in with Google in just a few steps.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Livewire Volt</h3>
+                    <p>Modern functional components API for Livewire. Build reactive UIs with minimal JavaScript.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>Tailwind CSS</h3>
+                    <p>Pre-configured Tailwind CSS 3 with dark mode support. Beautiful, responsive design out of the box.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🔧</div>
+                    <h3>Laravel Breeze</h3>
+                    <p>Complete authentication scaffolding with profile management, password reset, and email verification.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">📦</div>
+                    <h3>Modern Stack</h3>
+                    <p>Laravel 12, PHP 8.4, Vite bundler, and Pest testing framework. Everything you need for modern development.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">📚</div>
+                    <h3>Well Documented</h3>
+                    <p>Comprehensive setup guide with troubleshooting, architecture overview, and step-by-step instructions.</p>
+                </div>
+            </div>
+
+            <section class="quick-start" id="quick-start">
+                <h2>🚀 Quick Start Guide</h2>
+                
+                <h3>Prerequisites</h3>
+                <ul class="steps">
+                    <li>PHP 8.4 or higher</li>
+                    <li>Composer installed</li>
+                    <li>Node.js 18+ installed</li>
+                    <li>Google Cloud account</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Installation Steps</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Clone the repository</strong>
+                        <div class="code-block">git clone https://github.com/alexramsey92/laravel-cloud-starter-google-oauth.git
+cd laravel-cloud-starter-google-oauth</div>
+                    </li>
+                    <li>
+                        <strong>Install dependencies</strong>
+                        <div class="code-block">composer install
+npm install</div>
+                    </li>
+                    <li>
+                        <strong>Setup environment</strong>
+                        <div class="code-block">cp .env.example .env
+php artisan key:generate</div>
+                    </li>
+                    <li>
+                        <strong>Configure Google OAuth</strong>
+                        <p>Visit <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a> and:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Create a new project</li>
+                            <li>Enable Google+ API</li>
+                            <li>Create OAuth 2.0 credentials (Web application)</li>
+                            <li>Add redirect URI: <code>http://your-domain/auth/google/callback</code></li>
+                            <li>Add credentials to <code>.env</code>:
+                                <div class="code-block">GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Run migrations and build assets</strong>
+                        <div class="code-block">php artisan migrate
+npm run build</div>
+                    </li>
+                    <li>
+                        <strong>Start development server</strong>
+                        <div class="code-block">php artisan serve
+npm run dev  # In another terminal</div>
+                    </li>
+                </ol>
+
+                <p style="margin-top: 2rem; padding: 1rem; background: #e7f3ff; border-left: 4px solid #667eea; border-radius: 4px;">
+                    <strong>💡 Tip:</strong> For detailed troubleshooting and configuration options, check the comprehensive guide on the welcome page after setup.
+                </p>
+            </section>
+
+            <section id="tech-stack">
+                <h2>🛠️ Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-badge">Laravel 12</div>
+                    <div class="tech-badge">PHP 8.4</div>
+                    <div class="tech-badge">Livewire 3</div>
+                    <div class="tech-badge">Livewire Volt</div>
+                    <div class="tech-badge">Tailwind CSS 3</div>
+                    <div class="tech-badge">Vite</div>
+                    <div class="tech-badge">Laravel Socialite</div>
+                    <div class="tech-badge">SQLite</div>
+                    <div class="tech-badge">Pest</div>
+                </div>
+            </section>
+
+            <section style="margin: 3rem 0;">
+                <h2>📖 What's Included</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Authentication</h3>
+                        <p>Complete auth system with email/password login, registration, password reset, email verification, and Google OAuth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>User Management</h3>
+                        <p>Profile page with ability to update profile info, change password, and delete account securely.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Protected Routes</h3>
+                        <p>Dashboard and profile pages protected by authentication middleware with proper access control.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Responsive Design</h3>
+                        <p>Mobile-first design with Tailwind CSS. Perfect on desktop, tablet, and mobile devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Test Suite</h3>
+                        <p>Comprehensive Pest tests for authentication flows, profile management, and user registration.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Documentation</h3>
+                        <p>In-app guides, troubleshooting section, and this GitHub Pages site with everything you need.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin: 3rem 0; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+                <h2>🔗 Resources</h2>
+                <ul style="list-style-position: inside; line-height: 2;">
+                    <li><a href="https://laravel.com/docs" target="_blank">Laravel Documentation</a></li>
+                    <li><a href="https://livewire.laravel.com" target="_blank">Livewire Documentation</a></li>
+                    <li><a href="https://livewire.laravel.com/docs/volt" target="_blank">Livewire Volt Documentation</a></li>
+                    <li><a href="https://tailwindcss.com/docs" target="_blank">Tailwind CSS Documentation</a></li>
+                    <li><a href="https://laravel.com/docs/socialite" target="_blank">Laravel Socialite Documentation</a></li>
+                    <li><a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+                </ul>
+            </section>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>Laravel Cloud Starter - Google OAuth Edition</p>
+        <div class="footer-links">
+            <a href="https://github.com/alexramsey92/laravel-cloud-starter-google-oauth" target="_blank">GitHub</a>
+            <a href="https://github.com/alexramsey92" target="_blank">Author</a>
+            <a href="https://laravel.com" target="_blank">Laravel</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">Made with ❤️ for the Laravel community</p>
+    </footer>
+</body>
+</html>
