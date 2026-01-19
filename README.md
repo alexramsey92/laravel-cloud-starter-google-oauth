@@ -7,6 +7,8 @@ A lightweight Laravel 12 starter kit with **Breeze + Livewire + Tailwind + Googl
 [![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![Google OAuth](https://img.shields.io/badge/Google_OAuth-Ready-4285F4?logo=google)](https://console.cloud.google.com)
 
+📖 **[View Documentation](https://alexramsey92.github.io/laravel-cloud-starter-google-oauth/)**
+
 ## Features
 
 - 🔐 **Laravel Breeze + Livewire** - Authentication with reactive components
