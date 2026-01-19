@@ -1,0 +1,70 @@
+{
+    "name": "laravel-cloud-starter-google-oauth/laravel-cloud-starter-google-oauth",
+    "type": "project",
+    "description": "Laravel Cloud Starter with Breeze, Livewire, and Google OAuth.",
+    "keywords": ["laravel", "framework", "livewire", "breeze", "tailwind", "google-oauth", "socialite"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/socialite": "^5.24",
+        "livewire/livewire": "^4.0"
+    },
+    "require-dev": {
+        "laravel/breeze": "^2.0",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0"
+    },
+    "suggest": {
+        "laravel/socialite": "Required for social authentication (Google, GitHub, etc.)"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
