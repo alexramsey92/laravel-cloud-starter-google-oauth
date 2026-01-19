@@ -22,5 +22,8 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
-// Laravel Breeze will add its routes when installed
-// Run: php artisan breeze:install livewire
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';

@@ -48,16 +48,16 @@
                     wire:model="form.remember" 
                     id="remember" 
                     type="checkbox" 
-                    class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" 
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" 
                     name="remember"
                 >
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}" wire:navigate>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -75,12 +75,12 @@
     
     {{-- Register Link --}}
     <div class="text-center mt-6">
-        <span class="text-sm text-gray-600 dark:text-gray-400">
+        <span class="text-sm text-gray-600">
             Don't have an account?
         </span>
         <a href="{{ route('register') }}" 
            wire:navigate
-           class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium">
+           class="text-sm text-indigo-600 hover:text-indigo-500 font-medium">
             Sign up
         </a>
     </div>

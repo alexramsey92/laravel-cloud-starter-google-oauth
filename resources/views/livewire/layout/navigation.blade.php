@@ -1,11 +1,20 @@
-{{--
-    EXAMPLE: Navigation with user avatar
-    
-    This shows how to display user avatars (including Google profile photos) in the navigation.
-    After running `php artisan breeze:install livewire`, update your navigation layout.
-    
-    Location: resources/views/layouts/navigation.blade.php
---}}
+<?php
+
+use App\Livewire\Actions\Logout;
+use Livewire\Volt\Component;
+
+new class extends Component
+{
+    /**
+     * Log the current user out of the application.
+     */
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/', navigate: true);
+    }
+}; ?>
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
@@ -32,10 +41,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            {{-- User Avatar --}}
-                            <x-user-avatar :user="auth()->user()" size="sm" class="me-2" />
-                            
-                            <div>{{ Auth::user()->name }}</div>
+                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -46,7 +52,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')" wire:navigate>
+                        <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -83,23 +89,12 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="flex items-center">
-                    {{-- User Avatar in Mobile --}}
-                    <x-user-avatar :user="auth()->user()" size="md" class="me-3" />
-                    
-                    <div>
-                        <div class="font-medium text-base text-gray-800">
-                            {{ Auth::user()->name }}
-                        </div>
-                        <div class="font-medium text-sm text-gray-500">
-                            {{ Auth::user()->email }}
-                        </div>
-                    </div>
-                </div>
+                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')" wire:navigate>
+                <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 

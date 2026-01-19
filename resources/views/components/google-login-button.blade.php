@@ -2,7 +2,7 @@
 
 <a 
     href="{{ route('google.redirect') }}" 
-    {{ $attributes->merge(['class' => 'w-full inline-flex justify-center items-center gap-3 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200']) }}
+    {{ $attributes->merge(['class' => 'w-full inline-flex justify-center items-center gap-3 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200']) }}
 >
     <!-- Google Logo SVG -->
     <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

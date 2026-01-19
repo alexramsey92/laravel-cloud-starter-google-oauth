@@ -22,6 +22,11 @@
 
                     <!-- Desktop Navigation -->
                     <div class="hidden md:flex items-center space-x-4">
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Login</a>
+                        @endauth
                         <a href="https://github.com/yourusername/laravel-cloud-starter-google-oauth" 
                            target="_blank" 
                            rel="noopener noreferrer" 
@@ -34,7 +39,7 @@
                         </a>
                     </div>
 
-                    <!-- Mobile Menu Button -->
+                    <!-- Mobile Menu Button --></div>
                     <div class="md:hidden flex items-center">
                         <button id="mobile-menu-button" 
                                 type="button"
@@ -52,6 +57,11 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 dark:border-gray-700">
                 <div class="px-4 py-3 space-y-1">
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Login</a>
+                    @endauth
                     <a href="https://github.com/yourusername/laravel-cloud-starter-google-oauth" 
                        target="_blank" 
                        rel="noopener noreferrer" 
@@ -64,35 +74,6 @@
                 </div>
             </div>
         </nav>
-
-        <!-- Vite Dev Server Warning -->
-        <div id="vite-warning" style="display: none;" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-            <div class="bg-yellow-500 text-gray-900 rounded-2xl shadow-2xl max-w-2xl w-full p-8 border-4 border-yellow-600 relative">
-                <button onclick="document.getElementById('vite-warning').style.display='none'" class="absolute top-4 right-4 text-gray-900 hover:text-gray-700 font-bold text-3xl leading-none">&times;</button>
-                
-                <div class="flex items-start mb-6">
-                    <svg class="w-16 h-16 mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    <div class="flex-1">
-                        <p class="font-bold text-3xl mb-4">Vite Dev Server Not Running!</p>
-                        <p class="text-xl mb-6">Your styling might look broken because the Vite development server isn't running.</p>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-900 text-white p-6 rounded-lg mb-6">
-                    <p class="text-lg font-semibold mb-3">To fix this, run in your terminal:</p>
-                    <code class="text-2xl font-mono block bg-black px-4 py-3 rounded">npm run dev</code>
-                </div>
-                
-                <div class="flex items-center text-sm">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-base">This warning only appears in local development</span>
-                </div>
-            </div>
-        </div>
 
         <div class="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 pt-24">
             <div class="max-w-4xl w-full space-y-12">
@@ -138,103 +119,366 @@
                         <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        Quick Setup: Google OAuth on Laravel Cloud
+                        Google OAuth Setup Guide
                     </h2>
                     
                     <div class="space-y-6">
-                        <!-- Step 1 -->
+                        <!-- Step 1: Google Cloud Console -->
                         <div class="flex">
                             <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
                                     1
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Create Google OAuth Credentials</h3>
-                                <p class="text-gray-600 dark:text-gray-400 mb-2">Visit <a href="https://console.cloud.google.com" target="_blank" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline">Google Cloud Console</a></p>
-                                <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                                    <li>Create a new project or select existing</li>
-                                    <li>Enable Google+ API</li>
-                                    <li>Go to Credentials → Create OAuth 2.0 Client ID</li>
-                                    <li>Set <strong>Authorized redirect URI</strong>: <code class="text-xs bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">https://your-app.laravel.cloud/auth/google/callback</code></li>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Create Google Cloud Project</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Go to <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Google Cloud Console</a> and create a new project:
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-400 ml-2">
+                                    <li>Click "Select a project" → "New Project"</li>
+                                    <li>Name it (e.g., "Laravel OAuth App")</li>
+                                    <li>Click "Create" and wait for the project to be created</li>
+                                    <li>Make sure the new project is selected in the top dropdown</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Step 2 -->
+                        <!-- Step 2: Enable Google+ API -->
                         <div class="flex">
                             <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
                                     2
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Configure Laravel Cloud Environment</h3>
-                                <p class="text-gray-600 dark:text-gray-400 mb-2">In your Laravel Cloud dashboard, add these environment variables:</p>
-                                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code>GOOGLE_CLIENT_ID=your-client-id-here
-GOOGLE_CLIENT_SECRET=your-client-secret-here
-GOOGLE_REDIRECT_URI=${APP_URL}/auth/google/callback</code></pre>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Enable Google APIs</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Enable the required APIs for OAuth to work:
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-400 ml-2">
+                                    <li>In the sidebar, go to "APIs & Services" → "Library"</li>
+                                    <li>Search for "Google+ API" and click "Enable"</li>
+                                    <li>Also enable "People API" (recommended for profile data)</li>
+                                </ul>
                             </div>
                         </div>
 
-                        <!-- Step 3 -->
+                        <!-- Step 3: Configure OAuth Consent Screen -->
                         <div class="flex">
                             <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
                                     3
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Deploy Your Application</h3>
-                                <p class="text-gray-600 dark:text-gray-400 mb-2">Push your code to trigger a deployment:</p>
-                                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code>git add .
-git commit -m "Configure Google OAuth"
-git push origin main</code></pre>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Configure OAuth Consent Screen</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Go to "APIs & Services" → "OAuth consent screen":
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-400 ml-2">
+                                    <li><strong>User Type:</strong> Select "External" (unless you have a Google Workspace)</li>
+                                    <li><strong>App name:</strong> Enter your app name (e.g., "Laravel Starter App")</li>
+                                    <li><strong>User support email:</strong> Your email address</li>
+                                    <li><strong>Developer contact:</strong> Your email address</li>
+                                    <li><strong>Scopes:</strong> Click "Add or Remove Scopes" and select:
+                                        <ul class="list-circle list-inside ml-4 mt-1">
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">.../auth/userinfo.email</code></li>
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">.../auth/userinfo.profile</code></li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Test users:</strong> Add your email for testing (only needed if not published)</li>
+                                    <li>Click "Save and Continue" through all steps</li>
+                                </ul>
                             </div>
                         </div>
 
-                        <!-- Step 4 -->
+                        <!-- Step 4: Create OAuth Credentials -->
                         <div class="flex">
                             <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 font-bold">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
+                                    4
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Create OAuth 2.0 Credentials</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Go to "APIs & Services" → "Credentials":
+                                </p>
+                                <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-400 ml-2">
+                                    <li>Click "Create Credentials" → "OAuth client ID"</li>
+                                    <li><strong>Application type:</strong> Select "Web application"</li>
+                                    <li><strong>Name:</strong> Something descriptive (e.g., "Laravel Web Client")</li>
+                                    <li><strong>Authorized JavaScript origins:</strong> Add your app URL:
+                                        <ul class="list-circle list-inside ml-4 mt-1">
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">http://localhost</code> (for local development)</li>
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">https://yourdomain.com</code> (for production)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Authorized redirect URIs:</strong> Add callback URLs:
+                                        <ul class="list-circle list-inside ml-4 mt-1">
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">http://localhost/auth/google/callback</code></li>
+                                            <li><code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">https://yourdomain.com/auth/google/callback</code></li>
+                                        </ul>
+                                    </li>
+                                    <li>Click "Create"</li>
+                                    <li>📋 <strong>Copy your Client ID and Client Secret</strong> - you'll need these next!</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Configure Laravel Environment -->
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
+                                    5
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Configure Your .env File</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Add your Google credentials to your <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">.env</code> file:
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 font-mono text-xs border border-gray-200 dark:border-gray-700">
+                                    <pre class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">GOOGLE_CLIENT_ID=your-client-id-here.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret-here
+GOOGLE_REDIRECT_URI=${APP_URL}/auth/google/callback</pre>
+                                </div>
+                                <p class="text-sm text-amber-600 dark:text-amber-400 mt-3 flex items-start">
+                                    <svg class="w-5 h-5 mr-1.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span><strong>Important:</strong> Never commit your <code>.env</code> file to version control! Keep your credentials secret.</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Database Setup -->
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-sm">
+                                    6
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Run Database Migrations</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    The user table includes <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">google_id</code> and <code class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">avatar</code> columns:
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 font-mono text-xs border border-gray-200 dark:border-gray-700">
+                                    <pre class="text-gray-800 dark:text-gray-200">php artisan migrate</pre>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                    This creates the users table with all necessary fields for Google OAuth.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Test It Out -->
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 font-bold text-sm">
                                     ✓
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Test Your OAuth Flow</h3>
-                                <p class="text-gray-600 dark:text-gray-400">Click the "Continue with Google" button above to test the authentication flow!</p>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Ready to Go! 🎉</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">
+                                    Click the "Continue with Google" button above to test your OAuth flow!
+                                </p>
+                                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                                    <p class="text-sm text-blue-800 dark:text-blue-200">
+                                        <strong>💡 Pro Tip:</strong> During testing, if you're not in the test users list and your app isn't published, you'll see a warning screen. Click "Advanced" → "Go to [your app] (unsafe)" to continue testing.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Additional Info -->
+                    <!-- How It Works Section -->
                     <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">📦 What's Included:</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">🔧 How the Authentication Flow Works</h3>
+                        <div class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">1.</span>
+                                <span>User clicks "Continue with Google" → redirected to Google's login page</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">2.</span>
+                                <span>User signs in with Google and grants permissions</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">3.</span>
+                                <span>Google redirects back to <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded">/auth/google/callback</code></span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">4.</span>
+                                <span>Laravel receives user info (name, email, avatar, google_id)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">5.</span>
+                                <span>System checks if user exists by email:
+                                    <ul class="list-disc list-inside ml-4 mt-1">
+                                        <li>If exists: Update google_id and avatar, then log them in</li>
+                                        <li>If new: Create account with auto-verified email, then log them in</li>
+                                    </ul>
+                                </span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 font-bold mr-2">6.</span>
+                                <span>User is redirected to the dashboard, fully authenticated!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What's Included Section -->
+                    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">📦 What's Included in This Starter</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-600 dark:text-gray-400">
                             <div class="flex items-start">
                                 <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span>GoogleAuthController with full OAuth flow</span>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">GoogleAuthController</strong>
+                                    <p class="text-xs mt-0.5">Complete OAuth flow with error handling & logging</p>
+                                </div>
                             </div>
                             <div class="flex items-start">
                                 <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span>User model with google_id & avatar fields</span>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">User Model Enhanced</strong>
+                                    <p class="text-xs mt-0.5">google_id, avatar columns & fillable attributes</p>
+                                </div>
                             </div>
                             <div class="flex items-start">
                                 <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span>Reusable Blade components for UI</span>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">Rate Limiting</strong>
+                                    <p class="text-xs mt-0.5">OAuth routes throttled to prevent abuse</p>
+                                </div>
                             </div>
                             <div class="flex items-start">
                                 <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span>Laravel Breeze auth scaffolding</span>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">Laravel Breeze</strong>
+                                    <p class="text-xs mt-0.5">Full auth scaffolding with Livewire + Tailwind</p>
+                                </div>
                             </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">Security Best Practices</strong>
+                                    <p class="text-xs mt-0.5">Input validation, email verification, secure sessions</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div>
+                                    <strong class="text-gray-900 dark:text-white">Reusable Components</strong>
+                                    <p class="text-xs mt-0.5">Google button, user avatar, auth dividers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Troubleshooting Section -->
+                    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">🔍 Troubleshooting Common Issues</h3>
+                        <div class="space-y-4">
+                            <details class="group">
+                                <summary class="cursor-pointer text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 transform group-open:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Error: "redirect_uri_mismatch"
+                                </summary>
+                                <div class="mt-2 ml-6 text-sm text-gray-600 dark:text-gray-400">
+                                    <p class="mb-2">This means the callback URL doesn't match what's configured in Google Cloud Console.</p>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Check your <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded">GOOGLE_REDIRECT_URI</code> in .env</li>
+                                        <li>Verify "Authorized redirect URIs" in Google Cloud Console exactly matches</li>
+                                        <li>Make sure there's no trailing slash difference</li>
+                                        <li>Run <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded">php artisan config:clear</code> after .env changes</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            
+                            <details class="group">
+                                <summary class="cursor-pointer text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 transform group-open:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Error: "Access blocked: This app's request is invalid"
+                                </summary>
+                                <div class="mt-2 ml-6 text-sm text-gray-600 dark:text-gray-400">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Make sure you've configured the OAuth consent screen completely</li>
+                                        <li>Add required scopes (userinfo.email and userinfo.profile)</li>
+                                        <li>Add yourself as a test user if the app isn't published</li>
+                                        <li>Wait a few minutes after making changes for them to propagate</li>
+                                    </ul>
+                                </div>
+                            </details>
+
+                            <details class="group">
+                                <summary class="cursor-pointer text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 transform group-open:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Google login works but returns to homepage
+                                </summary>
+                                <div class="mt-2 ml-6 text-sm text-gray-600 dark:text-gray-400">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Check Laravel logs: <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded">storage/logs/laravel.log</code></li>
+                                        <li>Verify database migrations have been run</li>
+                                        <li>Make sure your users table has google_id and avatar columns</li>
+                                        <li>Check that APP_URL in .env matches your actual URL</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Next Steps -->
+                    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">🚀 Next Steps</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="https://laravel.com/docs/socialite" target="_blank" rel="noopener noreferrer" 
+                               class="block p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 mr-2 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 dark:text-white text-sm">Laravel Socialite Docs</h4>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Learn about other OAuth providers</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" 
+                               class="block p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 mr-2 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 dark:text-white text-sm">Google Cloud Console</h4>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Manage your OAuth credentials</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -247,35 +491,6 @@ git push origin main</code></pre>
         </div>
 
         <script>
-            // Check if Vite dev server is running
-            // This helps developers who forget to run "npm run dev"
-            (function() {
-                // Only check in local development (not production builds)
-                const isLocalDev = window.location.hostname === 'localhost' || 
-                                   window.location.hostname.includes('.test') ||
-                                   window.location.hostname === '127.0.0.1';
-                
-                if (!isLocalDev) return;
-
-                // Check if Vite's dev server is accessible
-                const viteScript = document.querySelector('script[src*="@@vite"]') || 
-                                  document.querySelector('script[src*="5173"]');
-                
-                // If we're in dev mode but Vite assets aren't loading properly
-                setTimeout(function() {
-                    const styles = window.getComputedStyle(document.body);
-                    const hasGradient = styles.backgroundImage.includes('gradient');
-                    
-                    // If Tailwind classes aren't applying (no gradient background)
-                    if (!hasGradient) {
-                        const warning = document.getElementById('vite-warning');
-                        if (warning) {
-                            warning.style.display = 'block';
-                        }
-                    }
-                }, 500);
-            })();
-
             // Mobile menu toggle
             (function() {
                 const btn = document.getElementById('mobile-menu-button');
