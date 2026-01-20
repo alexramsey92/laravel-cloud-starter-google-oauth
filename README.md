@@ -47,6 +47,8 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
+> Note: When deploying on Laravel Cloud, the platform automatically generates `APP_KEY`. You can skip `php artisan key:generate` in Cloud environments.
+
 # 5. Create database
 touch database/database.sqlite
 
@@ -79,6 +81,8 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
+> Note: When deploying on Laravel Cloud, the platform automatically generates `APP_KEY`. You can skip `php artisan key:generate` in Cloud environments.
+
 # 5. Create database
 touch database/database.sqlite
 
@@ -94,6 +98,50 @@ php artisan migrate
 # 9. Visit in browser
 # Herd auto-serves at: http://laravel-cloud-starter-google-oauth.test
 ```
+
+## Local Development Setup vs Laravel Cloud Deployment
+
+### Local Development
+
+- Clone and install: `composer install`, `npm install`
+- Environment: copy `.env.example` to `.env`; run `php artisan key:generate`
+- Database: create `database/database.sqlite`; run `php artisan migrate`
+- Serve locally: Laravel Herd auto-serves, or run `php artisan serve`
+- OAuth redirect URI: set `GOOGLE_REDIRECT_URI` to `http://localhost/auth/google/callback` (or your Herd domain)
+
+### Laravel Cloud Deployment
+
+- Push your repository to Laravel Cloud and deploy
+- `APP_KEY`: generated automatically by Laravel Cloud (skip `key:generate`)
+- Environment: configure secrets in Cloud (e.g., `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `APP_URL`)
+- OAuth redirect URI: set to `https://your-cloud-domain/auth/google/callback`
+- Run migrations via Cloud tasks
+
+> Note: This project’s routes are pre-wired for Google OAuth. Ensure your Cloud domain and redirect URI match exactly.
+
+## Google OAuth Login Box Example
+
+Use the included Blade component to render a Google login button and wire it to the provided routes.
+
+```blade
+{{-- In a login view, e.g., resources/views/livewire/pages/auth/login.blade.php --}}
+
+<form wire:submit="login">
+    <!-- ... your email/password fields ... -->
+    <x-primary-button class="ms-3">{{ __('Log in') }}</x-primary-button>
+</form>
+
+<x-auth-divider text="Or continue with" />
+
+<x-google-login-button text="Sign in with Google" />
+```
+
+- Component: `resources/views/components/google-login-button.blade.php`
+- Routes: `google.redirect` → `/auth/google/redirect`, `google.callback` → `/auth/google/callback` in `routes/web.php`
+- Env vars:
+  - `GOOGLE_CLIENT_ID`
+  - `GOOGLE_CLIENT_SECRET`
+  - `GOOGLE_REDIRECT_URI` (e.g., `${APP_URL}/auth/google/callback`)
 
 ### Google OAuth Setup (Optional)
 

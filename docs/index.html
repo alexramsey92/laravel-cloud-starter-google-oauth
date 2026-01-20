@@ -393,6 +393,9 @@ npm install</div>
                         <strong>Setup environment</strong>
                         <div class="code-block">cp .env.example .env
 php artisan key:generate</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+                            Note: On <strong>Laravel Cloud</strong>, <code>APP_KEY</code> is generated automatically. You can skip <code>php artisan key:generate</code> when deploying there.
+                        </p>
                     </li>
                     <li>
                         <strong>Configure Google OAuth</strong>
@@ -423,6 +426,51 @@ npm run dev  # In another terminal</div>
                 <p style="margin-top: 2rem; padding: 1rem; background: #e7f3ff; border-left: 4px solid #667eea; border-radius: 4px;">
                     <strong>💡 Tip:</strong> For detailed troubleshooting and configuration options, check the comprehensive guide on the welcome page after setup.
                 </p>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                    <h3 style="margin-bottom: 1rem;">Local Development vs Laravel Cloud</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <div style="border: 1px solid #eee; border-radius: 6px; padding: 1rem;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">Local Development</h4>
+                            <div class="code-block">composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan serve</div>
+                            <p style="font-size: 0.9rem; color: #666;">Set <code>GOOGLE_REDIRECT_URI</code> to your local domain, e.g., <code>http://localhost/auth/google/callback</code> or your Herd domain.</p>
+                        </div>
+                        <div style="border: 1px solid #eee; border-radius: 6px; padding: 1rem;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">Laravel Cloud Deployment</h4>
+                            <ul style="list-style-position: inside; line-height: 1.8; color: #666;">
+                                <li>Push repository and deploy in Laravel Cloud</li>
+                                <li><strong>APP_KEY</strong> is generated automatically (skip <code>key:generate</code>)</li>
+                                <li>Configure <strong>secrets</strong>: <code>GOOGLE_CLIENT_ID</code>, <code>GOOGLE_CLIENT_SECRET</code>, <code>APP_URL</code></li>
+                                <li>Set <code>GOOGLE_REDIRECT_URI</code> to <code>https://your-domain/auth/google/callback</code></li>
+                                <li>Run migrations via Cloud tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                    <h3 style="margin-bottom: 1rem;">Google OAuth Login Box Example</h3>
+                    <p style="color: #666;">Drop the included component into your login view to enable Google sign-in:</p>
+                    <div class="code-block">&lt;form wire:submit=&quot;login&quot;&gt;
+    &lt;!-- ... your email/password fields ... --&gt;
+    &lt;x-primary-button class=&quot;ms-3&quot;&gt;{{ __('Log in') }}&lt;/x-primary-button&gt;
+&lt;/form&gt;
+
+&lt;x-auth-divider text=&quot;Or continue with&quot; /&gt;
+
+&lt;x-google-login-button text=&quot;Sign in with Google&quot; /&gt;</div>
+                    <ul style="list-style-position: inside; line-height: 1.8; color: #666;">
+                        <li>Component: <code>resources/views/components/google-login-button.blade.php</code></li>
+                        <li>Routes: <code>google.redirect</code> → <code>/auth/google/redirect</code>, <code>google.callback</code> → <code>/auth/google/callback</code></li>
+                        <li>Env: <code>GOOGLE_CLIENT_ID</code>, <code>GOOGLE_CLIENT_SECRET</code>, <code>GOOGLE_REDIRECT_URI</code></li>
+                    </ul>
+                </div>
             </section>
 
             <section id="tech-stack">

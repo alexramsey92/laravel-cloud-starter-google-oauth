@@ -115,6 +115,9 @@
                                         <div class="mt-2 rounded bg-gray-100 p-3 font-mono text-sm dark:bg-zinc-800">
                                             <code class="text-black dark:text-white">cp .env.example .env<br>php artisan key:generate</code>
                                         </div>
+                                        <p class="mt-2 text-xs text-black/60 dark:text-white/60">
+                                            Note: On <span class="font-semibold">Laravel Cloud</span>, <code class="rounded bg-gray-200 px-1 dark:bg-zinc-700">APP_KEY</code> is generated automatically. You can skip <code class="rounded bg-gray-200 px-1 dark:bg-zinc-700">php artisan key:generate</code> when deploying there.
+                                        </p>
                                     </div>
 
                                     <div class="border-l-4 border-[#FF2D20] pl-4">
